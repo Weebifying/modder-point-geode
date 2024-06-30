@@ -411,6 +411,8 @@ class $modify(MyLoadingLayer, LoadingLayer) {
         matjson::Value developers;
 		matjson::Value aliases;
 
+		log::error("LoadingLayer::init");
+
         m_fields->m_listener.bind([this, developers, aliases] (web::WebTask::Event* e) mutable {
             if (web::WebResponse* res = e->getValue()) {
                 developers = gDevelopers;
@@ -470,7 +472,7 @@ class $modify(MyLoadingLayer, LoadingLayer) {
 				gAliases = aliases;
 
             } else if (web::WebProgress* p = e->getProgress()) {
-                // log::info("progress: {}", p->downloadProgress().value_or(0.f));
+                log::info("Progress: {}", p->downloadProgress().value_or(0.f));
             } else if (e->isCancelled()) {
                 log::info("The request was cancelled... So sad :(");
             }
@@ -521,8 +523,11 @@ class $modify(MenuLayer) {
 				}
 			}
 		} else {
+			log::info("hey");
 			if (auto menu = this->getChildByID("bottom-menu")) {
+				log::warn("found menu");
 				if (auto button = menu->getChildByID("geode.loader/geode-button")) {
+					log::error("found button");
 					onGeodeAddress = addresser::getNonVirtual(as<CCMenuItemSpriteExtra*>(button)->m_pfnSelector);
 				}
 			}
