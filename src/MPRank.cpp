@@ -221,7 +221,7 @@ bool MPRankPopup::setup() {
     auto size = m_mainLayer->getContentSize();
     bool geodeTheme = Loader::get()->getLoadedMod("geode.loader")->getSettingValue<bool>("enable-geode-theme");
 
-    this->setTitle("Modder Points Leaderboard");
+    this->setTitle("Developer Points Leaderboard");
 
     auto bg = CCScale9Sprite::create("square02b_001.png");
     bg->setPosition({ m_bgSprite->getPositionX() , m_bgSprite->getPositionY() - 10.f });
@@ -260,7 +260,7 @@ bool MPRankPopup::setup() {
     );
     failMenu->addChild(
         CCLabelBMFont::create(
-            "Error loading modders",
+            "Error loading Developers",
             "bigFont.fnt"
         )
     );
