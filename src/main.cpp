@@ -286,39 +286,16 @@ void CustomMenuLayer_onGeode(MenuLayer* self, CCObject* sender) {
 
 class $modify(MenuLayer) {
 	static void onModify(auto& self) {
-        self.setHookPriority("MenuLayer::init", INT_MIN);
+        self.setHookPriority("MenuLayer::init", INT_MIN/2 + 2);
     }
 
 	bool init() {
 		if (!MenuLayer::init()) return false;
 
 		// get CustomMenuLayer::onGeode address
-		if (Loader::get()->isModLoaded("alphalaneous.pages_api")) {
-			if (auto menu = this->getChildByID("bottom-menu")) {
-				if (as<CCBool*>(menu->getUserObject("disable-pages"))->getValue()) {
-					if (auto button = menu->getChildByID("geode.loader/geode-button")) {
-						Addresses::CustomMenuLayer_onGeode = addresser::getNonVirtual(as<CCMenuItemSpriteExtra*>(button)->m_pfnSelector);
-					}
-				} else {
-					if (auto pages = menu->getChildByID("pages")) {
-						CCArrayExt<CCMenu*> page = pages->getChildren();
-						for (auto& pMenu : page) {
-							CCArrayExt<CCMenuItemSpriteExtra*> buttons = pMenu->getChildren();
-							for (auto& button : buttons) {
-								if (button->getID() == "geode.loader/geode-button") {
-									auto selector = button->m_pfnSelector;
-									Addresses::CustomMenuLayer_onGeode = addresser::getNonVirtual(selector);
-								}
-							}
-						}
-					}
-				}
-			}
-		} else {
-			if (auto menu = this->getChildByID("bottom-menu")) {
-				if (auto button = menu->getChildByID("geode.loader/geode-button")) {
-					Addresses::CustomMenuLayer_onGeode = addresser::getNonVirtual(as<CCMenuItemSpriteExtra*>(button)->m_pfnSelector);
-				}
+		if (auto menu = this->getChildByID("bottom-menu")) {
+			if (auto button = menu->getChildByID("geode.loader/geode-button")) {
+				Addresses::CustomMenuLayer_onGeode = addresser::getNonVirtual(as<CCMenuItemSpriteExtra*>(button)->m_pfnSelector);
 			}
 		}
 
