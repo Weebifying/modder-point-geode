@@ -33,4 +33,5 @@ public:
 	void onScaleDown(CCObject* sender);
 	void onCountFeatured(CCObject* sender);
 	void onRetryLoading(CCObject* sender);
+	void onInfo(CCObject* sender);
 };

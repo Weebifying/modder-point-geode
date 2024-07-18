@@ -215,6 +215,13 @@ void MPRankPopup::onRetryLoading(CCObject* sender) {
     m_listener.setFilter(req.get("https://api.geode-sdk.org/v1/mods"));
 }
 
+void MPRankPopup::onInfo(CCObject* sender) {
+    FLAlertLayer::create(
+        "Info",
+        "White Icon: +1 per mod on the index\n<cy>Gold Icon</c>: +1 per normal mod & +2 per featured mod on the index\n(Just like GD's rating system!)",
+        "OK"
+    )->show();
+}
 
 bool MPRankPopup::setup() {
     auto winSize = CCDirector::sharedDirector()->getWinSize();
@@ -364,6 +371,21 @@ bool MPRankPopup::setup() {
     menu->addChild(goldToggler);
 
     menu->updateLayout();
+
+    auto topRightMenu = CCMenu::create();
+    topRightMenu->setPosition({ 420.f , 270.f });
+    topRightMenu->setContentSize({ 20.f, 20.f });
+    topRightMenu->setID("top-right-menu");
+    m_mainLayer->addChild(topRightMenu);
+
+    auto infoBtn = CCMenuItemSpriteExtra::create(
+        CCSprite::createWithSpriteFrameName("GJ_infoIcon_001.png"),
+        this,
+        menu_selector(MPRankPopup::onInfo)
+    );
+    infoBtn->setScale(0.75f);
+    infoBtn->m_baseScale = 0.75f;
+    topRightMenu->addChild(infoBtn);
 
     if (DevsDataState::isFinished) MPRankPopup::loadLeaderboard();
 
