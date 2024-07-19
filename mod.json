@@ -7,14 +7,14 @@
 	},
 	"id": "weebify.index_modder_points",
 	"name": "Index Developer Points",
-	"version": "v1.0.0",
+	"version": "v1.0.1",
 	"developer": "Weebify",
 	"description": "A Creator-Points-like system for Geode Mod Developers",
 	"tags": [
 		"interface"
 	],
 	"resources": {
-		"files": [
+		"sprites": [
 			"res/*.png"
 		]
 	},
